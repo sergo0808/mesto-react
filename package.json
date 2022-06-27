@@ -17,6 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "homepage": "https://sergo0808.github.io/mesto-react/",
   "eslintConfig": {
     "extends": [
       "react-app",
