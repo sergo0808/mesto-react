@@ -8,6 +8,6 @@
 
 ### Вся файловая система сделана по БЭМ - Nested.
 
-### [Ссылка на сайт](https://sergo0808.github.io/mesto/)
+### [Ссылка на сайт](https://sergo0808.github.io/mesto-react/)
 
 Удачи!
