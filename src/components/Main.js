@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-// import profilAvatar from "../images/Kusto.jpg";
+import React from "react";
+import profilAvatar from "../images/Kusto.jpg";
 import { api } from "../utils/Api";
 import Card from "./Card";
 
@@ -10,7 +10,7 @@ function Main(props) {
   const [cards, setCards] = React.useState([]);
 
   function getUserInfo() {
-    Promise.all([api.setUserInfo(), api.getInitialCards()])
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([data, response]) => {
         setUsername(data.name);
         setUserDescription(data.about);
