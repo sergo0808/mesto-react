@@ -1,4 +1,4 @@
-function PopupWithImage(props) {
+function ImagePopup(props) {
   return (
     <div
       className={`popup popup_type_image popup_preview_active ${
@@ -27,4 +27,4 @@ function PopupWithImage(props) {
   );
 }
 
-export default PopupWithImage;
+export default ImagePopup;

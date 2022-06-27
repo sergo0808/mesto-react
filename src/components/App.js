@@ -3,7 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
-import PopupWithImage from "./PopupWithImage";
+import ImagePopup from "./PopupWithImage";
 import PopupWithConfirm from "./PopupWithConfirm";
 
 function App() {
@@ -47,10 +47,7 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer />
-        <PopupWithImage
-          card={selectedCard}
-          onClose={closeAllPopups}
-        ></PopupWithImage>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
 
         <PopupWithForm
           title="Редактировать профиль"
