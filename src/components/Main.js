@@ -1,5 +1,4 @@
 import React from "react";
-import profilAvatar from "../images/Kusto.jpg";
 import { api } from "../utils/Api";
 import Card from "./Card";
 
