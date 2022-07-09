@@ -1,18 +1,37 @@
-function Card(props) {
+import React from "react";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const cardDeleteButtonClassName = `element__group-basket ${isOwn && "element__group-basket_active "}`;
+  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const cardLikeButtonClassName = `element__group-like ${isLiked && "element__group-like_active "}`;
+
   function handleClick() {
-    props.onCardClick(props.card);
+    onCardClick(card);
   }
+
+  function handleLikeClick() {
+    onCardLike(card);
+  }
+
+  function handleDeleteClick() {
+    onCardDelete(card);
+  }
+
   return (
     <article className="element">
-      <img className="element__mask-group" alt={props.card.title} src={props.card.link} onClick={handleClick} />
+      <img className="element__mask-group" alt={card.name} src={card.link} onClick={handleClick} />
       <div className="element__group">
-        <h2 className="element__group-text">{props.card.title}</h2>
+        <h2 className="element__group-text">{card.name}</h2>
         <div className="element__like_container">
-          <button className="element__group-like" type="button"></button>
-          <span className="element__group-count">{props.card.likes.length}</span>
+          <button className={cardLikeButtonClassName} type="button" onClick={handleLikeClick}></button>
+          <span className="element__group-count">{card.likes.length}</span>
         </div>
       </div>
-      <button className="element__group-basket" type="button"></button>
+      <button className={cardDeleteButtonClassName} type="button" onClick={handleDeleteClick}></button>
     </article>
   );
 }

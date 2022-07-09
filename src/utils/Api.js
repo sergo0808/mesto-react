@@ -42,16 +42,9 @@ export class Api {
     }).then(this._handleResponse);
   }
 
-  likeCardApi(id) {
+  likeCardApi(id, isLiked) {
     return fetch(this.url + `/cards/` + id + "/likes", {
-      method: "PUT",
-      headers: this.headers,
-    }).then(this._handleResponse);
-  }
-
-  likeCardApiDrop(id) {
-    return fetch(this.url + `/cards/` + id + "/likes", {
-      method: "DELETE",
+      method: isLiked ? "PUT" : "DELETE",
       headers: this.headers,
     }).then(this._handleResponse);
   }
