@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose, onAddCard }) {
@@ -12,6 +12,11 @@ function AddPlacePopup({ isOpen, onClose, onAddCard }) {
   function handleChangePlaceName(event) {
     setName(event.target.value);
   }
+
+  useEffect(() => {
+    setName("");
+    setLink("");
+  }, [isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,6 +40,7 @@ function AddPlacePopup({ isOpen, onClose, onAddCard }) {
         minLength="2"
         maxLength="30"
         onChange={handleChangePlaceName}
+        value={name || ""}
         required
       />
       <span className="popup__error" id="name-mesto-error"></span>
@@ -45,6 +51,7 @@ function AddPlacePopup({ isOpen, onClose, onAddCard }) {
         name="link"
         placeholder="Ссылка на картинку"
         onChange={handleChangePlaceLink}
+        value={link || ""}
         required
       />
       <span className="popup__error" id="link-mesto-error"></span>

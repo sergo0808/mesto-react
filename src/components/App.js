@@ -42,16 +42,22 @@ function App() {
   }, []);
 
   function handleCardDelete(card) {
-    api.deleteCardApi(card._id).then((deleteCard) => {
-      setCards((state) => state.filter((deleteCard) => deleteCard._id !== card._id));
-    });
+    api
+      .deleteCardApi(card._id)
+      .then((deleteCard) => {
+        setCards((state) => state.filter((deleteCard) => deleteCard._id !== card._id));
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((item) => item._id === currentUser._id);
-    api.likeCardApi(card._id, !isLiked).then((newCard) => {
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
-    });
+    api
+      .likeCardApi(card._id, !isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+      })
+      .catch((err) => console.log(err));
   }
 
   const handleCardClick = (card) => setSelectedCard(card);
@@ -76,52 +82,55 @@ function App() {
   };
 
   function handleUpdateUser({ name, about }) {
-    api.updateUserInfom({ name, about }).then((data) => {
-      setCurrentUser(data);
-      closeAllPopups();
-    });
+    api
+      .updateUserInfom({ name, about })
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleAddCard(data) {
-    api.addCardApi(data).then((data) => {
-      setCards([data, ...cards]);
-      closeAllPopups();
-    });
+    api
+      .addCardApi(data)
+      .then((data) => {
+        setCards([data, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleUpdateAvatar({ avatar }) {
-    api.updateAvatarApi({ avatar }).then((data) => {
-      setCurrentUser(data);
-      closeAllPopups();
-    });
+    api
+      .updateAvatarApi({ avatar })
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
-        <div className="page">
-          <Header />
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            cards={cards}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-          />
-          <Footer />
-          <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
-          />
-          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={handleAddCard} />
-          <PopupWithForm title="Вы уверены ?" name="Confirm" />
-          <PopupWithConfirm></PopupWithConfirm>
-        </div>
+      <div className="page">
+        <Header />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+          cards={cards}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+        />
+        <Footer />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddCard={handleAddCard} />
+        <PopupWithForm title="Вы уверены ?" name="Confirm" />
+        <PopupWithConfirm></PopupWithConfirm>
       </div>
     </CurrentUserContext.Provider>
   );
